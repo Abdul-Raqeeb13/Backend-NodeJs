@@ -1,13 +1,12 @@
 // The asyncHandler function is a higher-order function (a function that takes another function as an argument). It is used in Express.js to handle asynchronous errors in route handlers without using try...catch in every route.
 
+// 🔹 Why Use asyncHandler?
+// Normally, when using async/await, you have to wrap every route in a try...catch block to handle errors properly. Instead of repeating try-catch in every route, asyncHandler does it automatically.
+
 // 📌 How It Works?
 // It takes an async request handler (requestHandler) as an argument.
 // It returns a new function that executes the handler inside Promise.resolve().
 // If the handler throws an error, .catch((err) => next(err)) ensures the error is passed to Express’s error-handling middleware.
-
-
-// 🔹 Why Use asyncHandler?
-// Normally, when using async/await, you have to wrap every route in a try...catch block to handle errors properly. Instead of repeating try-catch in every route, asyncHandler does it automatically.
 
 const asyncHandler = (requestHandler) => {
     return (req, res, next) => {
@@ -16,7 +15,7 @@ const asyncHandler = (requestHandler) => {
 };
 
 export { asyncHandler };
-
+ 
 
 
 
