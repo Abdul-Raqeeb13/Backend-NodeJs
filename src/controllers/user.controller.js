@@ -122,7 +122,6 @@ const loginUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: "None", // Allow cross-origin cookie access
     }
 
 
@@ -133,8 +132,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
     return res
         .status(200)
-        .cookie("accessToken", accessToken, { httpOnly: true, secure: false }) // Set secure: false for local testing
-        .cookie("refreshToken", refreshToken, { httpOnly: true, secure: false })
+        .cookie("accessToken", accessToken,options) // Set secure: false for local testing
+        .cookie("refreshToken", refreshToken,options)
         .json(
             new ApiResponse(200, { user: loggedInUser, accessToken, refreshToken }, "User Logged in successfully")
         );

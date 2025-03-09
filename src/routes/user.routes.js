@@ -8,6 +8,7 @@ const router = Router()
 // router.post("/register", registerUser)
 
 // upload.fields is a middleware run before the execution of registerUser afetr uplad it return req.files so we can use in registerUser function (we get request.files in registerUser line no : 28 & 29)
+// Uses upload.fields() middleware to handle multiple files in different fields.
 router.route("/register").post(upload.fields(
     [
         {

@@ -1,0 +1,102 @@
+--------------> multer uploads methods
+
+upload.single("profilePic") → Handles one file with field name profilePic.
+upload.array("photos", 5) → Allows up to 5 files in the field photos
+upload.fields → Stores different file types in different fields.
+
+-------------> mongodb operator
+
+1. Logical Operators
+
+$or	Matches documents where at least one condition is true.	{ $or: [{ username: "john" }, { email: "john@example.com" }] }
+$and	Matches documents where all conditions are true.	{ $and: [{ age: { $gte: 18 } }, { status: "active" }] }
+$not	Matches documents that do not satisfy the condition.	{ age: { $not: { $gt: 30 } } }
+$nor	Matches documents where none of the conditions are true.	{ $nor: [{ age: { $lt: 18 } }, { status: "inactive" }] }
+
+2. Comparison Operators
+
+$eq	Matches values equal to a specified value.	{ age: { $eq: 25 } }
+$ne	Matches values not equal to a specified value.	{ status: { $ne: "active" } }
+$gt	Matches values greater than a specified value.	{ age: { $gt: 21 } }
+$gte	Matches values greater than or equal to a specified value.	{ age: { $gte: 18 } }
+$lt	Matches values less than a specified value.	{ age: { $lt: 50 } }
+$lte	Matches values less than or equal to a specified value.	{ age: { $lte: 30 } }
+$in	Matches any value in an array.	{ status: { $in: ["active", "pending"] } }
+$nin	Matches values not in an array.	{ role: { $nin: ["admin", "manager"] } }
+
+3. Array Operators
+
+$all	Matches arrays that contain all the specified elements.	{ tags: { $all: ["mongodb", "database"] } }
+$size	Matches arrays with the specified length.	{ comments: { $size: 3 } }
+$elemMatch	Matches arrays with at least one element that satisfies the condition.	{ ratings: { $elemMatch: { score: { $gte: 4 } } } }
+
+4. Regular Expression (Text Search) Operators
+
+$regex	Matches documents based on a regular expression.	{ username: { $regex: "^J", $options: "i" } } → Finds names starting with "J", case-insensitive
+$text	Performs a full-text search.	{ $text: { $search: "developer" } }
+
+5. Projection Operators
+
+$exists	Checks if a field exists or not.	{ email: { $exists: true } }
+$type	Matches fields with a specific data type.	{ age: { $type: "number" } }
+
+6. Update Operators
+
+These are useful in update queries.
+
+$set	Updates a field with a new value.	{ $set: { status: "active" } }
+$unset	Removes a field from a document.	{ $unset: { phone: "" } }
+$inc	Increments a numeric field by a specified amount.	{ $inc: { age: 1 } }
+$mul	Multiplies a numeric field by a specified value.	{ $mul: { salary: 1.1 } }
+$push	Adds an element to an array.	{ $push: { tags: "mongodb" } }
+$pull	Removes an element from an array.	{ $pull: { tags: "deprecated" } }
+
+
+------------------> Monogo db operational paramaetr for save()
+
+validateBeforeSave → Skips schema validation before saving if set to false.
+timestamps → Automatically adds createdAt and updatedAt fields to the document.
+runValidators → Runs Mongoose validators before saving if set to true.
+safe → Ensures safe writes; can be false to disable write safety.
+strict → If false, allows saving fields that are not in the schema.
+session → Uses a MongoDB transaction session for saving.
+new *(for findOneAndUpdate, not save) → Returns the updated document instead of the old one if set to true.
+
+
+----------------> monog db differnt methods for queries filter and manipulate data
+
+🚀 Summary Table
+Method	Purpose
+.find()	Find multiple documents
+.findOne()	Find a single document
+.findById()	Find document by _id
+.select()	Include/exclude fields
+.sort()	Sort results
+.limit()	Limit number of results
+.skip()	Skip results (pagination)
+.countDocuments()	Count matching documents
+.distinct()	Get unique values for a field
+.populate()	Fetch referenced fields
+.exists()	Check if document exists
+.lean()	Return plain JavaScript object
+.updateOne()	Update one document
+.updateMany()	Update multiple documents
+.findOneAndUpdate()	Find and update one document
+.findByIdAndUpdate()	Find by ID and update
+.deleteOne()	Delete one document
+.deleteMany()	Delete multiple documents
+.findOneAndDelete()	Find and delete one document
+.findByIdAndDelete()	Find by ID and delete
+
+
+-----------------> COokies option
+const options = {
+    httpOnly: true,      // Prevent client-side access
+    secure: true,        // Send only over HTTPS
+    sameSite: "None",    // Allow cross-origin cookie access
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Expires in 7 days
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+    domain: "example.com", // Available on example.com
+    path: "/", // Available throughout the site
+    priority: "high", // High priority for browsers
+};

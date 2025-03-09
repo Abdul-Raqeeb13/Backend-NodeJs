@@ -1,5 +1,5 @@
 import express, { urlencoded } from "express"
-// used to get and set the cookie of user brower and and perform CRUD operation on cookies securelt
+// used to get and set the cookie from user brower and and perform CRUD operation on cookies securely
 import cookieParser from "cookie-parser"
 import cors from "cors"
 const app = express()
