@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import { loginUser, registerUser, userLogout, refreshAccessToken } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router()
 
 // BOTH ARE SAME WORKING BUT 2ND IN MORE CLEANER USING ROUTE
@@ -20,6 +21,13 @@ router.route("/register").post(upload.fields(
         }
     ]
 ), registerUser)
+
+router.route("/login").post(loginUser) 
+
+// secured routes
+router.route("/logout").post( verifyJWT , userLogout)
+
+router.route("/refresh-Token").post(refreshAccessToken)
 
 export default router
 

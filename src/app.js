@@ -15,7 +15,7 @@ app.use(cors({
     credentials: true
 }));
 
-{// Middleware to parse incoming JSON requests with a size limit of 16KB
+// Middleware to parse incoming JSON requests with a size limit of 16KB
 app.use(express.json({ limit: "16kb" })); 
 
 // Middleware to parse URL-encoded data (form submissions) with extended support for rich objects and arrays, limited to 16KB
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public")); 
 
 // Middleware to parse cookies, allowing access to request cookies
-app.use(cookieParser()); }
+app.use(cookieParser()); 
 
 // routes 
 import userRouter from './routes/user.routes.js'
