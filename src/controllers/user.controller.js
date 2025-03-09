@@ -26,9 +26,14 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
     const avatarLocalPath = req.files?.avatar[0]?.path;  // Finally, it retrieves the file path of the first uploaded file.
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
-    console.log(avatarLocalPath);
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path;
     
+
+    // 2nd way to handle image in first avatarLocalPath we throw new APiError jsut 
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
 
     // we check avatarfile exist or not because in databse we use required true . CoverImage is not required true that why we not check coverImage exist or not we check only avatarLocalPath
     // this check user give image or not 

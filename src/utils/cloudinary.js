@@ -22,9 +22,10 @@ cloudinary.config({
 // // function upload files on cloudinary
 const uploadOnCloudinary = async (localFilePath) => {
     try {
-        console.log(localFilePath);
 
         console.log("in clodinary");
+
+        if (!localFilePath) return null
 
         const response = await cloudinary.uploader.upload(localFilePath, {
             resource_type: "auto"  // what type of file iamge,video,audio raw, auto means its detect automatically
